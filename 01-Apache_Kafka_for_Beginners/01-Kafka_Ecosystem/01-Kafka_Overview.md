@@ -45,7 +45,7 @@ From 2011 to 2019 Kafka evolved as a set of five components:
 >- **Kafka Client API** - which is Producer and Consumer APIs. 
 >- **Kafka Connect** - which addresses the initial data integration problem for which Kafka was initially designed.
 >- **Kafka streams** -this one is another library for creating real time extreme processing applications.
->- ****KSQL** - with KSQL Kafka is now aiming to become a real time database and capture some market sharing Databases and DW/BI space.
+>- **KSQL** - with KSQL Kafka is now aiming to become a real time database and capture some market sharing Databases and DW/BI space.
 
 ## Where does Kakfa fit into an enterprise application ecosystem?
 
