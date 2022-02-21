@@ -4,7 +4,45 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8c87b04-ab28-4a0f-be5f-e4c036454668" name="Default Changelist" comment="" />
+    <list default="true" id="d8c87b04-ab28-4a0f-be5f-e4c036454668" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-0/00000000000000091439.index" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-0/00000000000000091439.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-0/00000000000000091439.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-0/00000000000000091439.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-1/00000000000000091107.index" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-1/00000000000000091107.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-1/00000000000000091107.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-1/00000000000000091107.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-1/leader-epoch-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-1/leader-epoch-checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-2/00000000000000090685.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-2/00000000000000090685.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-2/leader-epoch-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-2/leader-epoch-checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-3/00000000000000090934.index" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-3/00000000000000090934.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-3/00000000000000090934.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-3/00000000000000090934.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-4/00000000000000091094.index" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-4/00000000000000091094.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-4/00000000000000091094.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/invoice-4/00000000000000091094.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-0/meta.properties" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-0/meta.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-0/00000000000000091439.index" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-0/00000000000000091439.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-0/00000000000000091439.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-0/00000000000000091439.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-1/00000000000000091107.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-1/00000000000000091107.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-1/leader-epoch-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-1/leader-epoch-checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-2/00000000000000090685.index" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-2/00000000000000090685.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-2/00000000000000090685.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-2/00000000000000090685.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-3/00000000000000090934.index" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-3/00000000000000090934.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-3/00000000000000090934.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-3/00000000000000090934.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-4/00000000000000091094.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-4/00000000000000091094.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-4/leader-epoch-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/invoice-4/leader-epoch-checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-1/meta.properties" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-1/meta.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-0/00000000000000091439.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-0/00000000000000091439.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-0/leader-epoch-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-0/leader-epoch-checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-1/00000000000000091107.index" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-1/00000000000000091107.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-1/00000000000000091107.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-1/00000000000000091107.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-2/00000000000000090685.index" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-2/00000000000000090685.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-2/00000000000000090685.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-2/00000000000000090685.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-3/00000000000000090934.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-3/00000000000000090934.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-3/leader-epoch-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-3/leader-epoch-checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-4/00000000000000091094.index" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-4/00000000000000091094.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-4/00000000000000091094.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-4/00000000000000091094.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-4/leader-epoch-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/invoice-4/leader-epoch-checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/kafka-logs-2/meta.properties" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/kafka-logs-2/meta.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/zookeeper/version-2/log.b4" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/zookeeper/version-2/log.b4" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,7 +87,7 @@
       <recent name="C:\Udemy\FinalProjects\01-storage-demo\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.StorageDemo">
+  <component name="RunManager" selected="Batch.1-kafka-server-start">
     <configuration name="StorageDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="guru.learningjournal.kafka.examples.StorageDemo" />
       <module name="01-storage-demo" />
@@ -74,10 +112,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="1-kafka-server-start (1)" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+    <configuration name="1-kafka-server-start" type="BatchConfigurationType" factoryName="Batch" temporary="true">
       <module name="01-storage-demo" />
       <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="WORKING_DIRECTORY" value="./scripts" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\03-Storage_Architecture\01-storage-demo\scripts" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SCRIPT_NAME" value="1-kafka-server-start.cmd" />
       <option name="PARAMETERS" value="" />
@@ -85,10 +123,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="2-kafka-server-start (1)" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+    <configuration name="2-kafka-server-start" type="BatchConfigurationType" factoryName="Batch" temporary="true">
       <module name="01-storage-demo" />
       <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="WORKING_DIRECTORY" value="./scripts" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\03-Storage_Architecture\01-storage-demo\scripts" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SCRIPT_NAME" value="2-kafka-server-start.cmd" />
       <option name="PARAMETERS" value="" />
@@ -96,12 +134,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="describe-topic" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+    <configuration name="zookeeper-start" type="BatchConfigurationType" factoryName="Batch" temporary="true">
       <module name="01-storage-demo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\03-Storage_Architecture\01-storage-demo\scripts" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="describe-topic.cmd" />
+      <option name="SCRIPT_NAME" value="zookeeper-start.cmd" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -109,11 +147,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.StorageDemo" />
-        <item itemvalue="Batch.describe-topic" />
+        <item itemvalue="Batch.1-kafka-server-start" />
+        <item itemvalue="Batch.2-kafka-server-start" />
         <item itemvalue="Batch.0-kafka-server-start (1)" />
-        <item itemvalue="Batch.2-kafka-server-start (1)" />
-        <item itemvalue="Batch.1-kafka-server-start (1)" />
+        <item itemvalue="Batch.zookeeper-start" />
+        <item itemvalue="Application.StorageDemo" />
       </list>
     </recent_temporary>
   </component>
