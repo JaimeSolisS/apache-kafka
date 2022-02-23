@@ -1,0 +1,9 @@
+org\example\types\DeliveryAddress$Builder.class
+org\example\types\LineItem$1.class
+org\example\types\LineItem.class
+org\example\types\PosInvoice.class
+org\example\types\DeliveryAddress$1.class
+org\example\types\PosInvoice$1.class
+org\example\types\DeliveryAddress.class
+org\example\types\LineItem$Builder.class
+org\example\types\PosInvoice$Builder.class
