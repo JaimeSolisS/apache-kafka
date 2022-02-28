@@ -117,3 +117,126 @@ The alternative is the Avro Serializer. The Avro is a binary format, and the ser
 
 But in this example, we want to use JSON Serializer. We do not need to implement a JSON serializer because it is a standard thing, and we have already included a JsonSerializer class in your startup project inside serde package. You can use the same in this example, and you are also free to use it in any other application wherever you want to serialize your messages as JSON.
 
+## Hands on 
+
+Change topic-create.cmd to:
+```cmd
+%KAFKA_HOME%\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 3 --partitions 3 --topic pos --config min.insync.replicas=2
+```
+
+Create AppConfigs class
+```java
+public class AppConfigs {
+    public final static String applicationID = "PosSimulator";
+    public final static String bootstrapServers = "localhost:9092,localhost:9093";
+}
+```
+
+Create a `RunnableProducer` class to create a producer thread. This class implements the Runnable interface. The Runnable interface allows us to execute an instance of this class as a separate Thread.
+
+```java
+
+```
+
+Implement a main() method to create thread and start them in a separate class named `PosSimulator`. 
+
+```java
+public class PosSimulator {
+    private static final Logger logger = LogManager.getLogger();
+    public static void main(String[] args) {
+    }
+}
+```
+
+Create private members and a constructor to take these values in `RunnableProducer`.
+
+```java
+ private final AtomicBoolean stopper = new AtomicBoolean(false);
+    private KafkaProducer<String, PosInvoice> producer;
+    private String topicName;
+    private InvoiceGenerator invoiceGenerator;
+    private int produceSpeed;
+    private int id;
+
+    RunnableProducer(int id, KafkaProducer<String, PosInvoice> producer, String topicName, int produceSpeed) {
+        this.id = id;
+        this.producer = producer;
+        this.topicName = topicName;
+        this.produceSpeed = produceSpeed;
+        this.invoiceGenerator = InvoiceGenerator.getInstance();
+    }
+```
+
+Finally, we need to override the run method and implement all the steps that we talked about. The first thing is to generate invoices with `invoiceGenerator`. We need to send these lines to Kafka. so, let's do producer.send(). We provide the topic name, a message key, which would be storeID and the message value (posInvoice object).
+
+```java
+ @Override
+    public void run(){
+        try {
+            logger.info("Starting producer thread - " + id);
+            while (!stopper.get()) {
+                PosInvoice posInvoice = invoiceGenerator.getNextInvoice();
+                producer.send(new ProducerRecord<>(topicName, posInvoice.getStoreID(), posInvoice));
+                Thread.sleep(produceSpeed);
+            }
+
+        } catch (Exception e) {
+            logger.error("Exception in Producer thread - " + id);
+            throw new RuntimeException(e);
+        }
+    }
+
+    void shutdown() {
+        logger.info("Shutting down producer thread - " + id);
+        stopper.set(true);
+
+    }
+```
+Now lets code PosSimulator. Get topic name, number of producers and speed from command line
+```java
+        if (args.length < 3) {
+            System.out.println("Please provide command line arguments: topicName noOfProducers produceSpeed");
+            System.exit(-1);
+        }
+        String topicName = args[0];
+        int noOfProducers = new Integer(args[1]);
+        int produceSpeed = new Integer(args[2]);
+```
+Define a properties object and load id. Put other necessary configurations directly into the properties.
+
+```java
+Properties properties = new Properties();
+        properties.put(ProducerConfig.CLIENT_ID_CONFIG, AppConfigs.applicationID);
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, AppConfigs.bootstrapServers);
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+```
+
+Create Kafka producer 
+```java
+ KafkaProducer<String, PosInvoice> kafkaProducer = new KafkaProducer<>(properties);
+```
+
+Create the producer threads
+
+```java
+ ExecutorService executor = Executors.newFixedThreadPool(noOfProducers);
+        final List<RunnableProducer> runnableProducers = new ArrayList<>();
+
+        for (int i = 0; i < noOfProducers; i++) {
+            RunnableProducer runnableProducer = new RunnableProducer(i, kafkaProducer, topicName, produceSpeed);
+            runnableProducers.add(runnableProducer);
+            executor.submit(runnableProducer);
+        }
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            for (RunnableProducer p : runnableProducers) p.shutdown();
+            executor.shutdown();
+            logger.info("Closing Executor Service");
+            try {
+                executor.awaitTermination(produceSpeed * 2, TimeUnit.MILLISECONDS);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }));
+```
