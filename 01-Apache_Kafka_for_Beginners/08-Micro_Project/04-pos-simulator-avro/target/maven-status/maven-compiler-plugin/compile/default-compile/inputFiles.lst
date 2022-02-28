@@ -1,0 +1,9 @@
+C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\08-Micro_Project\04-pos-simulator-avro\src\main\java\org\example\AppConfigs.java
+C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\08-Micro_Project\04-pos-simulator-avro\src\main\java\org\example\datagenerator\ProductGenerator.java
+C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\08-Micro_Project\04-pos-simulator-avro\src\main\java\org\example\RunnableProducer.java
+C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\08-Micro_Project\04-pos-simulator-avro\src\main\java\org\example\types\LineItem.java
+C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\08-Micro_Project\04-pos-simulator-avro\src\main\java\org\example\types\PosInvoice.java
+C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\08-Micro_Project\04-pos-simulator-avro\src\main\java\org\example\datagenerator\AddressGenerator.java
+C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\08-Micro_Project\04-pos-simulator-avro\src\main\java\org\example\datagenerator\InvoiceGenerator.java
+C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\08-Micro_Project\04-pos-simulator-avro\src\main\java\org\example\PosSimulator.java
+C:\Users\jsolis\Documents\kafka\apache-kafka\01-Apache_Kafka_for_Beginners\08-Micro_Project\04-pos-simulator-avro\src\main\java\org\example\types\DeliveryAddress.java
