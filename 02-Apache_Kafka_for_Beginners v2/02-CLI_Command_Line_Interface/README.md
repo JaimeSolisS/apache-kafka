@@ -81,7 +81,7 @@ If we launch one consumer per partition with the same group, each consumer will 
 kafka-consumer-groups.bat  --bootstrap-server localhost:9092 --list
 ```
 
-### List
+### Describe
 ```cmd
 kafka-consumer-groups.bat  --bootstrap-server localhost:9092 --describe --group group-name
 ```
