@@ -1,0 +1,1 @@
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic twitter tweets --partitions 6 --replication-factor 1
