@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="38c38cdc-5f9d-447a-b36e-b2f2df753be0" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/../../04-Kafka_Twitter_Producer/Twitter_Project/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jsolis/kafka/twitter/Secrets.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Producer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Producer.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/create-topic.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/create-topic.cmd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jsolis/kafka/twitter/TwitterProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jsolis/kafka/twitter/TwitterProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jsolis/kafka/twitter/TwitterProducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jsolis/kafka/twitter/TwitterProducer.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,9 +42,14 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jsolis\Documents\kafka\apache-kafka\02-Apache_Kafka_for_Beginners v2\04-Kafka_Twitter_Project\Twitter_Project\scripts" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.TwitterProducer">
     <configuration name="TwitterProducer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.jsolis.kafka.twitter.TwitterProducer" />
       <module name="Twitter_Project" />
@@ -57,9 +63,57 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="1-kafka-server-start" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="Twitter_Project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\jsolis\Documents\kafka\apache-kafka\02-Apache_Kafka_for_Beginners v2\04-Kafka_Twitter_Project\Twitter_Project\scripts" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="1-kafka-server-start.cmd" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="2-kafka-server-start" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="Twitter_Project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\jsolis\Documents\kafka\apache-kafka\02-Apache_Kafka_for_Beginners v2\04-Kafka_Twitter_Project\Twitter_Project\scripts" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="2-kafka-server-start.cmd" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="create-topic" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="Twitter_Project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\jsolis\Documents\kafka\apache-kafka\02-Apache_Kafka_for_Beginners v2\04-Kafka_Twitter_Project\Twitter_Project\scripts" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="create-topic.cmd" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="start-consumer" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="Twitter_Project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\jsolis\Documents\kafka\apache-kafka\02-Apache_Kafka_for_Beginners v2\04-Kafka_Twitter_Project\Twitter_Project\scripts" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="start-consumer.cmd" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.TwitterProducer" />
+        <item itemvalue="Batch.start-consumer" />
+        <item itemvalue="Batch.create-topic" />
+        <item itemvalue="Batch.2-kafka-server-start" />
+        <item itemvalue="Batch.1-kafka-server-start" />
       </list>
     </recent_temporary>
   </component>
