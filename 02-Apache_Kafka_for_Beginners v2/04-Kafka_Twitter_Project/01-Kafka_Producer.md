@@ -94,8 +94,8 @@ public void run() {
         return hosebirdClient;
     }
 ```
-
-To test if the cliern works, we have to make a loop for polling the data and stoping the client when we get an exception.
+## Test Client
+To test if the client works, we have to make a loop for polling the data and stoping the client when we get an exception.
 ```java
     public void run() {
         logger.info("Setup");
@@ -135,3 +135,72 @@ Run the code and we should establish a connection and start seing tweets
 [hosebird-client-io-thread-0] INFO com.twitter.hbc.httpclient.ClientBase - Hosebird-Client-01 Processing connection data
 [main] INFO com.jsolis.kafka.twitter.TwitterProducer - {"created_at":"Tue Mar 08 20:47:53 +0000 2022","id":1501298682230194184,"id_str":"1501298682230194184","text":"We are not going to the moon, the moon is comming...
 ```
+
+## Create Kafka Producer
+
+Inside run function create the producer.
+```java
+KafkaProducer<String, String> producer = createKafkaProducer();
+```
+
+Create the function, same as before.
+```java
+public KafkaProducer<String, String> createKafkaProducer(){
+    String bootstrapServers = "localhost:9092";
+    // create Producer properties
+    Properties properties = new Properties ();
+    properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+    properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName ());
+    properties.setProperty(ProducerConfig. VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName ());
+
+    // create the producer
+    KafkaProducer<String, String> producer = new KafkaProducer<String, String>(properties);
+
+    return producer;
+}
+```
+
+Everytime we're done we will do a producer.send() and intercept errors. Update the code to:
+
+```java
+if (msg != null){
+    logger.info(msg);
+    producer.send(new ProducerRecord<>("twitter_tweets", null, msg), new Callback() {
+        @Override
+        public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+            if (e != null){
+                logger.error("Something happened", e);
+            }
+        }
+    });
+}
+```
+
+Create the cmd files to start zookeeper, kafka brokers, create the topic and start a consumer
+
+```cmd
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic twitter tweets --partitions 6 --replication-factor 1
+```
+```cmd 
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic twitter_tweets
+```
+ Start everything and the consumer should start recieving the messages that are being produced. 
+
+ Add a shutdown hook
+ ```java
+ //...
+// create a kafka producer
+    KafkaProducer<String, String> producer = createKafkaProducer();
+
+    //add a shutdown hook
+    Runtime.getRuntime().addShutdownHook (new Thread(() -> {
+        logger.info("stopping application...");
+        logger.info("shutting down client from twitter...");
+        client.stop();
+        logger.info("closing producer...");
+        producer.close();
+        logger.info("done!");
+    }));
+//...
+ ```
+The reason we do close the producer is so that it sends all the messages that it still has in memory to Kafka before the application is shut down.
