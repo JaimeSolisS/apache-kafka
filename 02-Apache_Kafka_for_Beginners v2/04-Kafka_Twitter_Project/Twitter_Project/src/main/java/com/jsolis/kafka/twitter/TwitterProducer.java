@@ -24,6 +24,9 @@ import java.util.concurrent.TimeUnit;
 public class TwitterProducer {
 
     Logger logger = LoggerFactory.getLogger(TwitterProducer.class.getName());
+
+    List<String> terms = Lists.newArrayList("bitcoin");
+
     public TwitterProducer() {
     }
 
@@ -58,6 +61,16 @@ public class TwitterProducer {
         // create a kafka producer
         KafkaProducer<String, String> producer = createKafkaProducer();
 
+        //add a shutdown hook
+        Runtime.getRuntime().addShutdownHook (new Thread(() -> {
+            logger.info("stopping application...");
+            logger.info("shutting down client from twitter...");
+            client.stop();
+            logger.info("closing producer...");
+            producer.close();
+            logger.info("done!");
+        }));
+
 
         // loop to send tweets to kafka
         // on a different thread, or multiple different threads....
@@ -90,7 +103,7 @@ public class TwitterProducer {
         StatusesFilterEndpoint hosebirdEndpoint = new StatusesFilterEndpoint();
         // Optional: set up some followings and track terms
         //List<Long> followings = Lists.newArrayList(1234L, 566788L);
-        List<String> terms = Lists.newArrayList("bitcoin");
+
         //hosebirdEndpoint.followings(followings);
         hosebirdEndpoint.trackTerms(terms);
 
