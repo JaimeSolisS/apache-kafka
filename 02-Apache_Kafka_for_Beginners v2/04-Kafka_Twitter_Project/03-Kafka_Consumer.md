@@ -206,3 +206,53 @@ Start zookeper, the brokers, make sure the topic is created. Run the producer fo
     ....
 }
 ```
+
+# Idempotence
+
+```java
+for (ConsumerRecord<String, String> record : records){
+    // where we insert data into ElasticSearch
+    IndexRequest indexRequest = new IndexRequest("twitter").source(record.value(), XContentType.JSON);
+    ...
+```
+
+So what happens is that if this gets run twice for the same record value it seems like the same tweet will be inserting two times and that's quite bad. The reason is because every time we insert data we get a new id. What we want is to make sure it's idempotent and for making it idempotent we need to tell elasticsearch which id to use, not just a random one. but we need to find an id to use to make it idempotent. There are 2 ways:
+1. A generic ID
+```java
+// kafka generic ID
+String id = record.topic() + "_" + record.partition() + "_" + record.offset();
+```
+2. Twitter specific id
+We add dependency to parse JSON
+```xml
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.8.5</version>
+</dependency>
+```
+We create extractIdFromTweet function
+```java
+private static JsonParser jsonParser = new JsonParser();
+private static String extractIdFromTweet (String tweetJson){
+    // gson library
+    return jsonParser.parse(tweetJson)
+            .getAsJsonObject()
+            .get("id_str")
+            .getAsString();
+}
+```
+Call the function and put the id in the request object
+```java 
+// twitter feed specific id
+String id = extractIdFromTweet(record.value());
+
+// where we insert data into ElasticSearch
+IndexRequest indexRequest = new IndexRequest("twitter").source(record.value(), XContentType.JSON);
+indexRequest.id(id);
+
+IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
+logger.info(indexResponse.getId());
+```
+
+Now the ids that are being returned are the ids from the tweets. If we stop the code qucikly and run it again we'll see the same sequence becase the offeset hasn't been committed yet. Basically the data is being reinserted but it's not inserted as a duplicate anymore because we have forced an id to be the id of the tweets.
