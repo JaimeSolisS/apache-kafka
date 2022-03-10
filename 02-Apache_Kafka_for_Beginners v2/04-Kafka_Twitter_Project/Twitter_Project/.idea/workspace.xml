@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38c38cdc-5f9d-447a-b36e-b2f2df753be0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../03-Kafka_Consumer.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/src/main/java/com/jsolis/kafka/elasticsearch/ESecrets.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/src/main/java/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03-Kafka_Consumer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../03-Kafka_Consumer.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/src/main/java/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/src/main/java/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/target/classes/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/target/classes/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/target/classes/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/target/classes/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jsolis/kafka/twitter/TwitterProducer$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jsolis/kafka/twitter/TwitterProducer.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +72,7 @@
     </configuration>
     <configuration name="TwitterProducer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.jsolis.kafka.twitter.TwitterProducer" />
-      <module name="Twitter_Project" />
+      <module name="kafka-producer-twitter" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.jsolis.kafka.twitter.*" />
@@ -82,10 +83,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="1-kafka-server-start" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="Twitter_Project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\jsolis\Documents\kafka\apache-kafka\02-Apache_Kafka_for_Beginners v2\04-Kafka_Twitter_Project\Twitter_Project\scripts" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="1-kafka-server-start.cmd" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="2-kafka-server-start" type="BatchConfigurationType" factoryName="Batch" temporary="true">
       <module name="Twitter_Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="WORKING_DIRECTORY" value="./scripts" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\jsolis\Documents\kafka\apache-kafka\02-Apache_Kafka_for_Beginners v2\04-Kafka_Twitter_Project\Twitter_Project\scripts" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SCRIPT_NAME" value="2-kafka-server-start.cmd" />
       <option name="PARAMETERS" value="" />
@@ -96,20 +108,9 @@
     <configuration name="create-topic" type="BatchConfigurationType" factoryName="Batch" temporary="true">
       <module name="Twitter_Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="WORKING_DIRECTORY" value="./scripts" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\jsolis\Documents\kafka\apache-kafka\02-Apache_Kafka_for_Beginners v2\04-Kafka_Twitter_Project\Twitter_Project\scripts" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SCRIPT_NAME" value="create-topic.cmd" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="start-consumer" type="BatchConfigurationType" factoryName="Batch" temporary="true">
-      <module name="Twitter_Project" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="WORKING_DIRECTORY" value="./scripts" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="start-consumer.cmd" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -119,9 +120,9 @@
       <list>
         <item itemvalue="Application.ElasticSearchConsumer" />
         <item itemvalue="Application.TwitterProducer" />
-        <item itemvalue="Batch.start-consumer" />
         <item itemvalue="Batch.create-topic" />
         <item itemvalue="Batch.2-kafka-server-start" />
+        <item itemvalue="Batch.1-kafka-server-start" />
       </list>
     </recent_temporary>
   </component>

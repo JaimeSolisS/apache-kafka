@@ -124,3 +124,85 @@ If we verify it on elasticsearch and we do a get with the id we should see that 
   }
 }
 ```
+
+# Write the consumer & Send to ElasticSearch
+
+Create a static function and paste code we already did for consumer. Obviously, change the groupId. We would pass the topic as argument. 
+
+```java
+ public static KafkaConsumer<String, String> createConsumer(String topic){
+        String bootstrapServers = "localhost:9092";
+        String groupId = "kafka-demo-elasticsearch";
+
+        // create consumer configs
+        Properties properties = new Properties ();
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName ( ));
+        properties.setProperty(ConsumerConfig. VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName ());
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); //earliest, latest, none
+
+        // create consumer
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(properties);
+        
+        // subscribe consumer to topic
+        consumer.subscribe(Arrays.asList(topic));
+
+        return consumer;
+    }
+```
+
+Poll data and add the request and response to the loop. It should look as follows:
+```java
+public static void main(String[] args) throws IOException {
+
+    Logger logger = LoggerFactory.getLogger(ElasticSearchConsumer.class.getName());
+    RestHighLevelClient client = createClient();
+
+    KafkaConsumer<String, String> consumer = createConsumer("twitter_tweets");
+
+    // poll for new data
+    while(true){
+        ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100)); // new in Kafka 2.0.0
+        for (ConsumerRecord<String, String> tweet : records){
+
+            // where we insert data into ElasticSearch
+            IndexRequest indexRequest = new IndexRequest("twitter").source(tweet.value(), XContentType.JSON);
+            IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
+
+            String id = indexResponse.getId();
+            logger.info(id);
+
+            // introduce delay on purpose
+            try {
+                Thread.sleep(1000); 
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //client.close();
+    }
+```
+
+Start zookeper, the brokers, make sure the topic is created. Run the producer for a few seconds and then run the consumer for a few seconds as well. You should see the ids of the docs that are being inserted into ElasticSearch and if you perform a GET with some random id you should see the json correclty in ElasticSearch. 
+
+```json 
+{
+  "_index": "twitter",
+  "_type": "_doc",
+  "_id": "GgZhdX8BeAD9qxXAPvZv",
+  "_version": 1,
+  "_seq_no": 5,
+  "_primary_term": 1,
+  "found": true,
+  "_source": {
+    "created_at": "Thu Mar 10 19:48:51 +0000 2022",
+    "id": 1502008602156048400,
+    "id_str": "1502008602156048386",
+    "text": "RT @CryptoListy: @TokenTax is a crypto tax software platform. And a full-service #cryptocurrency #tax accounting firm. Calculate your #Bitc…",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "truncated": false,
+    ....
+}
+```
