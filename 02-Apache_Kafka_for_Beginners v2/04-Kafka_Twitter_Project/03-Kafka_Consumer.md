@@ -268,36 +268,117 @@ properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "10"); // receive
 Inside the while-loop but after the for-loop do the manual commit. 
 
 ```java
-  // poll for new data
-        while(true){
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100)); // new in Kafka 2.0.0
-            logger.info("Received " +records.count() + " records");
-            for (ConsumerRecord<String, String> record : records){
+while(true){
+    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100)); // new in Kafka 2.0.0
 
-                // twitter feed specific id
-                String id = extractIdFromTweet(record.value());
+    Integer recordCount = records.count();
+    logger.info("Received " +recordCount + " records");
 
-                // where we insert data into ElasticSearch
-                IndexRequest indexRequest = new IndexRequest("twitter").source(record.value(), XContentType.JSON);
-                indexRequest.id(id);
+    BulkRequest bulkRequest = new BulkRequest();
 
-                IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
-                logger.info(indexResponse.getId());
-                try {
-                    Thread.sleep(1000); // introduce delay on purpose
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            /* MANUAL COMMIT */
-            logger.info("Committing offsets...");
-            consumer.commitSync();
-            logger.info("Offsets have been committed");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+    for (ConsumerRecord<String, String> record : records){
+        // twitter feed specific id
+        String id = extractIdFromTweet(record.value());
+
+        // where we insert data into ElasticSearch
+        IndexRequest indexRequest = new IndexRequest("twitter").source(record.value(), XContentType.JSON);
+        indexRequest.id(id);
+
+        bulkRequest.add(indexRequest); // we add to our bulk request all records (takes no time)
+    }
+
+    if (recordCount > 0){
+        BulkResponse bulkItemResponses = client.bulk(bulkRequest, RequestOptions.DEFAULT);
+        logger.info("Committing offsets...");
+        consumer.commitSync();
+        logger.info("Offsets have been committed");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+    }
+}
 ```
 If we execute we should get something like this
+```
+main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - Received 10 records
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079641036541952
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079641229664256
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079644832768002
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079646275633152
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079646405324801
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079651879034883
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079658099187715
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079660812902400
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079664596078607
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079673362264068
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - Committing offsets...
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - Offsets have been committed
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - Received 10 records
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079676822560773
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079677317406722
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079680089890817
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079680857341958
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079682623447043
+[main] INFO com.jsolis.kafka.elasticsearch.ElasticSearchConsumer - 1502079684091154436
+```
+
+So we receive 10 records, then they are inserted one by one, and then, when we're done inserting 10 records, the offsets are committed. Then we receive another 10 records and so on. 
+
+# Performance improvement
+
+We will use Bulk Response to take efficient usage of batching. 
+
+```java 
+while(true){
+    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100)); // new in Kafka 2.0.0
+
+    Integer recordCount = records.count();
+    logger.info("Received " +recordCount + " records");
+
+    BulkRequest bulkRequest = new BulkRequest();
+
+    for (ConsumerRecord<String, String> record : records){
+
+        // twitter feed specific id
+        String id = extractIdFromTweet(record.value());
+
+        // where we insert data into ElasticSearch
+        IndexRequest indexRequest = new IndexRequest("twitter").source(record.value(), XContentType.JSON);
+        indexRequest.id(id);
+
+        bulkRequest.add(indexRequest); // we add to our bulk request all records (takes no time)
+    }
+
+    if (recordCount > 0){
+        BulkResponse bulkItemResponses = client.bulk(bulkRequest, RequestOptions.DEFAULT);
+        logger.info("Committing offsets...");
+        consumer.commitSync();
+        logger.info("Offsets have been committed");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+We just loop over all the records and load all of them into bulkRequest.
+
+We may face a NullPointer Exception if we got some probles with the tweet id, or something is corrupted so we can do a simple try-catch. 
+
+```java
+// twitter feed specific id
+try {
+    String id = extractIdFromTweet(record.value());
+    
+    // where we insert data into ElasticSearch
+    IndexRequest indexRequest = new IndexRequest("twitter").source(record.value(), XContentType.JSON);
+    indexRequest.id(id);
+
+    bulkRequest.add(indexRequest); // we add to our bulk request all records (takes no time)
+} catch (NullPointerException e){
+    logger.warn("Skipping bad data: " + record.value());
+}
+```

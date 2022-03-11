@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/../03-Kafka_Consumer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../03-Kafka_Consumer.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/src/main/java/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/src/main/java/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/target/classes/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/target/classes/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
