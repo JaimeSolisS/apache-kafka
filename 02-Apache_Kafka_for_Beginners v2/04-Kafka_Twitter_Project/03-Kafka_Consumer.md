@@ -256,3 +256,48 @@ logger.info(indexResponse.getId());
 ```
 
 Now the ids that are being returned are the ids from the tweets. If we stop the code qucikly and run it again we'll see the same sequence becase the offeset hasn't been committed yet. Basically the data is being reinserted but it's not inserted as a duplicate anymore because we have forced an id to be the id of the tweets.
+
+# Manual Commit of Offsets
+
+Add the following properties
+```java
+properties.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false"); // disable auto commit of offsets
+properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "10"); // receive 10 records at a time
+```
+
+Inside the while-loop but after the for-loop do the manual commit. 
+
+```java
+  // poll for new data
+        while(true){
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100)); // new in Kafka 2.0.0
+            logger.info("Received " +records.count() + " records");
+            for (ConsumerRecord<String, String> record : records){
+
+                // twitter feed specific id
+                String id = extractIdFromTweet(record.value());
+
+                // where we insert data into ElasticSearch
+                IndexRequest indexRequest = new IndexRequest("twitter").source(record.value(), XContentType.JSON);
+                indexRequest.id(id);
+
+                IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
+                logger.info(indexResponse.getId());
+                try {
+                    Thread.sleep(1000); // introduce delay on purpose
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            /* MANUAL COMMIT */
+            logger.info("Committing offsets...");
+            consumer.commitSync();
+            logger.info("Offsets have been committed");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+```
+If we execute we should get something like this

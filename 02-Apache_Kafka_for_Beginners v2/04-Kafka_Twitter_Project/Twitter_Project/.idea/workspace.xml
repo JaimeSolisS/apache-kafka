@@ -7,9 +7,7 @@
     <list default="true" id="38c38cdc-5f9d-447a-b36e-b2f2df753be0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../03-Kafka_Consumer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../03-Kafka_Consumer.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/src/main/java/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/src/main/java/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/target/classes/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/target/classes/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/target/classes/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/target/classes/com/jsolis/kafka/elasticsearch/ElasticSearchConsumer.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
