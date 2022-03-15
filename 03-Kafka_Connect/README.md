@@ -61,3 +61,7 @@ Data comes from your source, goes to Connect cluster made out of workers and pus
    - Configuration is submitted using a REST API
    - Easy to scale, and fault tolerant (rebalancing in case a worker dies)
    - Useful for `production deployment of connectors`
+
+# List of available connectors
+- There are many source and sink connectors
+- The best place to find them is the [Confluent website](https://www.confluent.io/hub/).
