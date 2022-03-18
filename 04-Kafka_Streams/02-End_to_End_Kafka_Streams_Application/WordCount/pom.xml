@@ -44,6 +44,34 @@
                 <target>1.8</target>
             </configuration>
         </plugin>
+
+        <!--package as one fat jar-->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.3.0</version>
+            <configuration>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+                <archive>
+                    <!--Specify Main Class full path-->
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <mainClass>org.jsolis.kafka.streams.StreamsStarterApp</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>assemble-all</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
 
