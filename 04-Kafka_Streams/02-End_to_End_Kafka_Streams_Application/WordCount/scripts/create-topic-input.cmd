@@ -1,0 +1,1 @@
+kafka-topics.bat --bootstrap-server localhost:9092 --topic word-count-input --create --partitions 2 --replication-factor 1
