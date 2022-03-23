@@ -1,0 +1,1 @@
+kafka-topics.bat --bootstrap-server localhost:9092 --topic users-and-colors --create --partitions 1 --replication-factor 1 --config cleanup.policy=compact
