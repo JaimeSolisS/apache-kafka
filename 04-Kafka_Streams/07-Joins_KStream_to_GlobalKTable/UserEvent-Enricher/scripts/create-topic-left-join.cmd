@@ -1,0 +1,2 @@
+REM create out topic for user purchases enriched with user data (left join)
+kafka-topics.bat --bootstrap-server localhost:9092 --topic user-purchases-enriched-left-join --create --partitions 3 --replication-factor 1

@@ -1,0 +1,2 @@
+REM create table of user information - log compacted for optimization
+kafka-topics.bat --bootstrap-server localhost:9092 --topic user-table --create --partitions 2 --replication-factor 1 --config cleanup.policy=compact
