@@ -104,7 +104,7 @@ Create userprofile.json
 Execute ksql-datagen 
                                                                  
 ```cmd
-ksql-datagen schema=userprofile.json bootstrap-server=broker:29092 format=json topic=USERPROFILE key=userid msgRate=1 iterations=100
+ksql-datagen schema=userprofile.json format=json topic=USERPROFILE key=userid msgRate=1 iterations=100
 ```
 
 I kept receiving the following errors because the bootstrap server by default is 9092:
@@ -113,10 +113,10 @@ I kept receiving the following errors because the bootstrap server by default is
 Error when sending message to topic: 'USERPROFILE', with key: '['1000']', and value: '[ '1000' | 'Grace' | 'Fawcett' | 'IN' | '3.9' ]'
 org.apache.kafka.common.errors.TimeoutException: Topic USERPROFILE not present in metadata after 60000 ms.
 ```
-So I had to add the bootstrap-server property manually:
+So I had to add the bootstrap-server property manually. To run indefinitely just don't add iterations property :
 
 ```cmd
-ksql-datagen schema=userprofile.json bootstrap-server=broker:29092 format=json topic=USERPROFILE key=userid msgRate=1 iterations=100
+ksql-datagen schema=userprofile.json bootstrap-server=broker:29092 format=json topic=USERPROFILE key=userid msgRate=1
 ```
 
 Now it produced 100 records:
