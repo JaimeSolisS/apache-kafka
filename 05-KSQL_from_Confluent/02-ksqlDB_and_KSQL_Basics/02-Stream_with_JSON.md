@@ -17,8 +17,7 @@
 
 ## Create topic 
 ```cmd
-kafka-topics --bootstrap-server localhost:9092 --create --topic USERPROFILE --partitions 1 --replication-factor
-1
+kafka-topics --bootstrap-server localhost:9092 --create --topic USERPROFILE --partitions 1 --replication-factor 1
 ```
 
 ## Launch Consumer
