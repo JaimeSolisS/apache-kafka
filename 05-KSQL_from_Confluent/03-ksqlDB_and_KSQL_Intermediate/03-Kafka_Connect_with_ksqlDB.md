@@ -159,5 +159,81 @@ incrementing.column.name=ref
 topic.prefix=db-
 key=username
 ```
- Again I got errors so I had to update docker-compose file and restart the containers and do everything again.  
+ Again I got errors so I had to update docker-compose file and restart the containers and do everything again. Now that the JDBC is installed, I was able to create the connector through ksql.
+
+ ```sql 
+ ksql> CREATE SOURCE CONNECTOR `mssql-jdbc-source` WITH(
+>    "connector.class"='io.confluent.connect.jdbc.JdbcSourceConnector',
+>    "connection.url"='jdbc:sqlserver://localhost:1433;databaseName=kafka;',
+>    "connection.user"='SA',
+>    "connection.password"='KSQLStreamsDemo4u!@@',
+>    "table.whitelist"='carusers',
+>    "mode"='incrementing',
+>    "incrementing.column.name"='ref',
+>    "topic.prefix"='db-',
+>    "key"='username');
+
+ Message
+-------------------------------------
+ Created connector mssql-jdbc-source
+-------------------------------------
+ ```
+
+ But since the topic is not being created, check the logs and the connector failed
+
+ ```
+[2022-03-31 21:01:20,774] ERROR [Worker clientId=connect-1, groupId=compose-connect-group] Failed to start connector 'mssql-jdbc-source' (org.apache.kafka.connect.runtime.distributed.DistributedHerder)
+
+org.apache.kafka.connect.errors.ConnectException: Failed to start connector: mssql-jdbc-source
+
+Caused by: org.apache.kafka.connect.errors.ConnectException: Failed to transition connector mssql-jdbc-source to state STARTED
+
+... 8 more
+
+Caused by: org.apache.kafka.connect.errors.ConnectException: com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host localhost, port 1433 has failed. Error: "Connection refused (Connection refused). Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+ ```
+
+ Realized that hostname was localhost. When a container tries to access localhost, just like any other machine it's trying to communicate with itself. In this case, the ksql container will not have MSSQL running on it, so it was failing. So I changed the hostname for the containter and changed the connection string. Now it worked. 
+
+```sql 
+ksql> CREATE SOURCE CONNECTOR `mssql-jdbc-source` WITH(
+>    "connector.class"='io.confluent.connect.jdbc.JdbcSourceConnector',
+>    "connection.url"='jdbc:sqlserver://sqlserver:1433;databaseName=kafka;',
+>    "connection.user"='SA',
+>    "connection.password"='KSQLStreamsDemo4u!@@',
+>    "table.whitelist"='carusers',
+>    "mode"='incrementing',
+>    "incrementing.column.name"='ref',
+>    "topic.prefix"='db-',
+>    "key"='username');
+
+ Message
+-------------------------------------
+ Created connector mssql-jdbc-source
+-------------------------------------
+ksql> print 'db-carusers' from beginning;
+Key format: KAFKA_STRING
+Value format: AVRO or KAFKA_STRING
+rowtime: 2022/03/31 21:30:37.880 Z, key: Alice, value: {"username": "Alice", "ref": 1}, partition: 0
+rowtime: 2022/03/31 21:30:37.882 Z, key: Bob, value: {"username": "Bob", "ref": 2}, partition: 0
+rowtime: 2022/03/31 21:30:37.882 Z, key: Charlie, value: {"username": "Charlie", "ref": 3}, partition: 0
+```
+The topic was automatically created and data has already been pulled into the topic. Insert more records in the database with sql and they should added to the topic instantly. 
+
+```sql
+INSERT INTO carusers VALUES ('Derek'); 
+go
+```
+
+```sql
+ksql> print 'db-carusers' from beginning;
+Key format: KAFKA_STRING
+Value format: AVRO or KAFKA_STRING
+rowtime: 2022/03/31 21:30:37.880 Z, key: Alice, value: {"username": "Alice", "ref": 1}, partition: 0
+rowtime: 2022/03/31 21:30:37.882 Z, key: Bob, value: {"username": "Bob", "ref": 2}, partition: 0
+rowtime: 2022/03/31 21:30:37.882 Z, key: Charlie, value: {"username": "Charlie", "ref": 3}, partition: 0
+rowtime: 2022/03/31 22:00:43.548 Z, key: Derek, value: {"username": "Derek", "ref": 4}, partition: 0
+rowtime: 2022/03/31 22:36:49.440 Z, key: Emma, value: {"username": "Emma", "ref": 5}, partition: 0
+```
+
 
