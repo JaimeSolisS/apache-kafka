@@ -106,40 +106,56 @@ Schema
 }
 ```
 
-Lauch a producer (the topic will be created automatically) 
+Lauch a producer (the topic will be created automatically). If you can't find the command, check under use confluentinc/cp-schema-registry (hence the hostname is broker and not localhost).
+
 ```cmd
-kafka-avro-console-producer --bootstrap-server localhost:9092 --topic COMPLAINTS_AVRO \
+kafka-avro-console-producer --bootstrap-server broker:29092 --topic COMPLAINTS_AVRO \
 --property value.schema='
 {
   "type": "record",
   "name": "myrecord",
   "fields": [
-      {"name": "customer name", "type": "string" }
-      {"name": "complaint_type", "type": "string" }
-      {"name": "trip_cost", "type": "float" }
-      {"name": "new customer", "type": "boolean"}
+      {"name": "customer_name", "type": "string" },
+      {"name": "complaint_type", "type": "string" },
+      {"name": "trip_cost", "type": "float" },
+      {"name": "new_customer", "type": "boolean"}
   ]
 }'
-
->{"customer_name":"Carol", "complaint_type":"Late arrival", "trip_cost": 19.60, "new_customer": false}
-
+{"customer_name":"Carol", "complaint_type":"Late arrival", "trip_cost": 19.60, "new_customer": false}
 ```
-
+ I noticed my avro producer didn't have a '>' character to specify it was accepting messages, so I spent quite a few time thinking it wasn't working and researching for a fix. Until I found this thread https://stackoverflow.com/questions/39625778/kafka-avro-console-producer-quick-start-fails  
+ 
 Check if Topic was created
 
 ```cmd
 kafka-topics --bootstrap-server localhost:9092 --list
+COMPLAINTS_AVRO
+COMPLAINTS_CSV
+COMPLAINTS_JSON
+COUNTRY-CSV
+COUNTRYDRIVERS
+USERPROFILE
 ```
 Create Stream (do not need to specify columns because they are already defined within the data)
 ```sql
-ksql> CREATE STREAM complaints_avro WITH (VALUE FORMAT = 'AVRO', KAFKA_TOPIC = 'COMPLAINTS_AVRO');
+ksql> CREATE STREAM complaints_avro WITH (VALUE_FORMAT = 'AVRO', KAFKA_TOPIC = 'COMPLAINTS_AVRO');
+ Message
+----------------
+ Stream created
+----------------
 
 ksql> select * from complaints_avro emit changes;
++----------------------------+----------------------------+----------------------------+----------------------------+
+|CUSTOMER_NAME               |COMPLAINT_TYPE              |TRIP_COST                   |NEW_CUSTOMER                |
++----------------------------+----------------------------+----------------------------+----------------------------+
+|Carol                       |Late arrival                |19.600000381469727          |false                       |
 ```
 
 Now Inject bad data into the producer 
 
 ```cmd
-> {"customer_name":"Bad ata", "complaint_type":"Bad driver", "trip_cost": 22.40, "new_customer": ShouldBeABoolean}
+{"customer_name":"Bad ata", "complaint_type":"Bad driver", "trip_cost": 22.40, "new_customer": ShouldBeABoolean}
+Caused by: com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'ShouldBeABoolean': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+...
 ```
 
